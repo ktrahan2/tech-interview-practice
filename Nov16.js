@@ -1,5 +1,4 @@
 //tech interview practice 11/13/2020
-
 //add two arrays together. 
 //[1, 2, 3] + [1, 2, 3] == [2, 4 , 6]
 //if index doesn't exist then its value is 0
@@ -14,7 +13,7 @@ const sumArrays = (array1, array2) => {
     let longestArray 
     //don't set variable to string unless its a string
     let sum = 0
-    //make separate function to find longest array
+    //make separate function to find longest array, use sort 
     if (array1.length > array2.length) {
         longestArray = array1
     } else {
@@ -41,6 +40,7 @@ const sumArrays = (array1, array2) => {
 
         }
     }
+
     return summedArray
 }
 
