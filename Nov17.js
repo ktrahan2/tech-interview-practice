@@ -35,6 +35,41 @@ const mapStringToHash = (array) => {
     return hashMap
 }
 
-console.log("test1", countRepeatedStrings(string))
-console.log("test2", countRepeatedStrings(string2))
-console.log("test3", countRepeatedStrings(string3))
+// console.log("test1", countRepeatedStrings(string))
+// console.log("test2", countRepeatedStrings(string2))
+// console.log("test3", countRepeatedStrings(string3))
+
+//Melissa code challenge
+
+const bracketString = '{[]}';
+
+function isValidBrackets ( bracketString ) {
+  
+  const stack = [];
+  const openingBrackets = [ "[", "{", "(" ]
+  
+  if ( bracketString.length % 2 != 0 ) {
+    return false
+  } else {
+    for ( let i = 0; i < bracketString.length; i++ ) {
+      if ( openingBrackets.includes(bracketString[i]) ) {
+       stack.push( bracketString[i] )
+      } else {
+        let lastOpenBracket = stack.pop()
+        if ( lastOpenBracket == "[" && bracketString[i] != "]" ) {
+          return false
+        } else if ( lastOpenBracket == "{" && bracketString[i] != "}" ) {
+          return false
+        } else if ( lastOpenBracket == "(" && bracketString[i] != ")" ) {
+          return false
+        } 
+      }
+    }
+    if ( stack.length === 0 ) {
+        return true
+    }
+  }
+};
+
+// console.log(isValidBrackets( bracketString ))
+
