@@ -12,7 +12,7 @@ const countRepeatedStrings = (string) => {
     stringArray = string.split(" ")
 
     let hashMap = mapStringToHash(stringArray)
-
+   
     Object.values(hashMap).map(el => {
         el >= 2 ? count += 1 : null
     })
@@ -35,7 +35,8 @@ const mapStringToHash = (array) => {
     return hashMap
 }
 
-// console.log("test1", countRepeatedStrings(string))
+
+console.log("test1", countRepeatedStrings(string))
 // console.log("test2", countRepeatedStrings(string2))
 // console.log("test3", countRepeatedStrings(string3))
 
