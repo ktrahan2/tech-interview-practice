@@ -1,4 +1,4 @@
-//repeated string
+//Problem - repeated string
 
 //you are given a string s, which is repeated infinitely
 //find the number of a's in the first n letters of that string
@@ -6,7 +6,7 @@
 function findNCharacters(s, n) {
     
     let aCount = 0
-    s = repeatString(s, n)
+    s = makeStringNLength(s, n)
 
     for (let i = 0; i < n; i++) {
         s[i] === "a" ? aCount += 1 : null
@@ -14,10 +14,8 @@ function findNCharacters(s, n) {
     
     return aCount
 }
-
-//repeat string n/s.length times. 
-// so if n = 10, and s.length = 5. repeat s 2 times. 
-function repeatString(s, n) {
+ 
+function makeStringNLength(s, n) {
     while (s.length < n) {
         s = s + s
     }
