@@ -40,7 +40,6 @@ const sumArrays = (array1, array2) => {
 
         }
     }
-
     return summedArray
 }
 
