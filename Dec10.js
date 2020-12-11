@@ -4,7 +4,7 @@ function reverseCharacters(array) {
     return array.reverse()
 }
 
-test1 = ["k", "y", "l", "e"]
+// test1 = ["k", "y", "l", "e"]
 
 // console.log(reverseCharacters(test1))
 
@@ -70,7 +70,11 @@ function mergeCookieOrders(array1, array2) {
     
 }
 
-let array1 = [3, 4, 6, 8, 9]
-let array2 = [1, 2, 5, 7]
+let array1 = [3, 4, 6, 8]
+let array2 = [1, 2, 5, 7, 9]
 
-console.log(mergeCookieOrders(array1, array2))
+// console.log(mergeCookieOrders(array1, array2))
+
+
+
+
