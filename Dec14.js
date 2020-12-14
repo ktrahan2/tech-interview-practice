@@ -58,3 +58,53 @@ function isItAPalindrome( string ) {
 // console.log(isItAPalindrome(string1))
 // console.log(isItAPalindrome(string2))
 // console.log(isItAPalindrome(string3))
+
+//build a map of the amount of times a word appears in a string
+//need to account for puncuation, remove it probably
+
+//I was able to solved but I used a .split and then a really round about way to remove all the symbols that may occur.
+//followed through their solution to add the isLetter and splitWords functions. Super intersting. Revisit this!
+function mapWordCount(string) {
+    let wordCountHash = {}
+    splitWords(string).map(word => {  
+        word = word.toLowerCase()
+        if (wordCountHash[word]) {
+            wordCountHash[word] += 1
+        } else {
+            wordCountHash[word] = 1
+        }
+    })
+    return wordCountHash
+}
+//didnt use += because each time you append a letter to the word it creates a new string causing O(n2) time. 
+function splitWords(string) {
+    const words = []
+    let currentWordStartIndex = 0
+    let currentWordLength = 0
+
+    for (let i = 0; i < string.length; i++) {
+        if ( isLetter(string[i]) ) {
+            if ( currentWordLength === 0 ) {
+                currentWordStartIndex = i
+            } 
+            currentWordLength++
+        } else {
+            let word = string.slice(currentWordStartIndex, currentWordStartIndex + currentWordLength)
+            if (word !== "") {
+                words.push(word)
+            }
+            currentWordLength = 0
+        }
+    }
+    return words
+}
+
+function isLetter(character) {
+    return 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.indexOf(character) >= 0;
+  }
+
+let string = "After beating the eggs, Dana read the next step:"
+let string2 = "Add milk and eggs, then add flour and sugar."
+
+console.log(mapWordCount(string))
+// console.log(mapWordCount(string2))
