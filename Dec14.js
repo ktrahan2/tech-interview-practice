@@ -31,4 +31,30 @@ let flightLength = 60
 // console.log(canTwoMoviesFillFlight(movieLengths3, flightLength))
 
 
-//
+//find out if any permutation is a palindrome
+//can the letters a string be organized in a way to create a palindrome
+//put all letters into a hash, check length, if they are all even and 1 odd then its a palindrome
+
+//real solution, use a set to narrow down, if theres only one value left than its a palindrome
+function isItAPalindrome( string ) {
+    let unPairedCharacters = new Set()
+
+    for (let char of string) {
+        if (unPairedCharacters.has(char)) {
+            unPairedCharacters.delete(char)
+        } else {
+            unPairedCharacters.add(char)
+        }
+    }
+    return unPairedCharacters.size <= 1
+}
+
+// let string = "civic" //true
+// let string1 = "ivicc" //true
+// let string2 = "purple" //false
+// let string3 = "elrppu" //false
+
+// console.log(isItAPalindrome(string))
+// console.log(isItAPalindrome(string1))
+// console.log(isItAPalindrome(string2))
+// console.log(isItAPalindrome(string3))
