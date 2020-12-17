@@ -25,3 +25,51 @@ const getMaxProfit = (stockPrices) => {
     return maxProfit
 }
 
+// ---------------------- //
+
+// find highest product of 3
+// array will have atleast 3 integer
+
+const findHighestProductOfThreeNumbers = ( array ) => {
+    if ( array.length >= 3 ) {
+        
+        let highestProductof3 = array[0] * array[1] * array[2]
+        let highestProductof2 = array[0] * array[1]
+        let highest = Math.max(array[0], array[1])
+        let lowerProductof2 = array[0] * array[1]
+        let lowest = Math.min(array[0], array[1])
+        
+        for (let i = 2; i < array.length; i++) {
+            let currentNumber = array[i]
+
+            highestProductof3 = Math.max(
+                highestProductof3,
+                currentNumber * highestProductof2,
+                currentNumber * lowerProductof2
+            )
+
+            highestProductof2 = Math.max(
+                highestProductof2,
+                currentNumber * highest,
+                currentNumber * lowest
+            )
+
+            lowerProductof2 = Math.min(
+                lowerProductof2,
+                currentNumber * highest,
+                currentNumber * lowest
+            )
+
+            highest = Math.max(highest, currentNumber)
+
+            lower = Math.min(lowest, currentNumber)
+        }    
+    return highestProductof3
+    }
+}
+
+let numberArray = [1, 2, 3, 4] // 24
+let numberArray2 = [2, 7, 5, 3] // 105
+
+console.log(findHighestProductOfThreeNumbers( numberArray ) )
+console.log(findHighestProductOfThreeNumbers( numberArray2 ))
