@@ -16,7 +16,7 @@ function sortScores(unsortedScores, highestPossibleScore) {
             scoresHash[el] = 1
         }
     })
-    
+
     for (let score in scoresHash) {
         let times = scoresHash[score]
         for (let j = 0; j < times; j++) {
@@ -25,6 +25,7 @@ function sortScores(unsortedScores, highestPossibleScore) {
     }
     return sortedScores
 }
+
 const unsortedScores = [37, 37, 89, 41, 65, 91, 53]; //works with hash maps if scores dont repeat
 const highestPossibleScore = 100;
 
