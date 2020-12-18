@@ -71,5 +71,9 @@ const findHighestProductOfThreeNumbers = ( array ) => {
 let numberArray = [1, 2, 3, 4] // 24
 let numberArray2 = [2, 7, 5, 3] // 105
 
-console.log(findHighestProductOfThreeNumbers( numberArray ) )
-console.log(findHighestProductOfThreeNumbers( numberArray2 ))
+// console.log(findHighestProductOfThreeNumbers( numberArray ) )
+// console.log(findHighestProductOfThreeNumbers( numberArray2 ))
+
+// --------------------//
+
+
