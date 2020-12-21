@@ -54,7 +54,8 @@ const findRotationPoint = ( array ) => {
     while ( floorIndex + 1 < ceilingIndex ) {
 
         let totalLength = ceilingIndex - floorIndex
-        let halfWayPoint = Math.floor( totalLength/2 )
+        //halfway point is eventually the rotation point
+        let halfWayPoint = Math.floor(floorIndex + (totalLength/2) )
         let currentPoint = array[halfWayPoint][0]
     
         if ( array[halfWayPoint][0] === target ) {
@@ -82,7 +83,7 @@ const words = [
     'othellolagkage',
   ];
 
-let test1 = ["z", "a", "b", "c", "d"]
+let test1 = [ "y", "z", "a", "b", "c", "d" ]
 
 console.log(findRotationPoint( words ))
 console.log(findRotationPoint( test1 ))
