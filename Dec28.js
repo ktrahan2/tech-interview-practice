@@ -62,3 +62,21 @@ let meetingTime =   [
 
 // --------------------------------- //
 
+class Solution {
+    solve(n) {
+        let clapArray = []
+        let i = 1
+        while ( i <= n ) {
+            let div = parseInt( i / 3 )
+            if ( i === div * 3 ) {
+                    clapArray.push("clap")
+            } else if ( i.toString().match(/[3,6,9]/)) {
+                    clapArray.push("clap")
+            } else {
+                clapArray.push(i.toString())
+            }
+            i++
+        }
+        return clapArray
+    }
+}
