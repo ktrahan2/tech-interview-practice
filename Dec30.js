@@ -14,7 +14,8 @@ class BinaryTreeNode {
       this.right = new BinaryTreeNode(value);
       return this.right;
     }
-  }
+}
+
   const root = new BinaryTreeNode(57)
   const node1 = root.insertLeft(17)
   const node2 = node1.insertLeft(12)
