@@ -4,7 +4,7 @@
 
 //input 39 output 3. 
 //3*9 = 27, 2*7 = 14, 1*4 = 4, takes 3 times to get to a single digit
-// 
+
 const persistence = ( num ) => {
 
     let splitNumber = num.toString().split("")
