@@ -62,7 +62,28 @@ function reconstructPath( path, startNode, endNode ) {
 
 // console.log(findQuickestConnect( network, "Jayden", "Jayden" )) // [ 'Jayden' ] // pass
 // console.log(findQuickestConnect( network, "Jayden", "Amelia" )) // [ 'Jayden', 'Amelia' ] // pass
-// console.log(findQuickestConnect( network, "Jayden", "Adam" )) // [ 'Jayden', 'Amelia', 'Adam' ] // pass
-console.log(findQuickestConnect( network, "Ren", "William" )) // [ 'Ren', 'Jayden', 'Min', 'William' ] //pass 
+// console.log(findQuickestConnect( network, "Jayden", "Adam" )) // [ 'Jayden', 'Amelia', 'Adam' ] // pass with interview cake code
+// console.log(findQuickestConnect( network, "Ren", "William" )) // [ 'Ren', 'Jayden', 'Min', 'William' ] //pass with IC code
+
+// ------------------------ //
+
+// Overlapping subproblems (recursion)
+
+// fibonacci as recursion
+
+const fib = (n) => {
+    if ( n===0 || n === 1 ) {
+        return n
+    }
+    return fib(n-1) + fib(n-2)
+}
+
+console.log(fib(3))
+
+//this creates a problem because in fib(5) it would call fib(2) three separate times. 
+
+
+
+
 
 
