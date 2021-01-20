@@ -17,7 +17,7 @@ const v1 = 2
 const x2 = 5
 const v2 = 3
 
-console.log(kangarooSong(x1, v1, x2, v2)) //no
+// console.log(kangarooSong(x1, v1, x2, v2)) //no
 
 // -------------- //
 
@@ -33,16 +33,18 @@ const timeInWords = (hour, minute) => {
     const timeInWords = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "twenty one", "twenty two", "twenty three", "twenty four", "twenty five", "twenty six", "twenty seven", "twenty eight", "twenty nine"]
 
     if ( minute === 00 ) {
-        return `${hour} o'clock`
+        return `${timeInWords[hour]} o'clock`
     } else if ( minute === 30 ) {
         return `half past ${timeInWords[hour]}`
     } else if ( minute === 15 ) {
         return `quarter past ${timeInWords[hour]}`
     } else if ( minute === 45 ) {
-        hour = hour + 1
-        return `quarter to ${timeInWords[hour]}`
-    } else if ( minute > 0 && minute < 15 || minute > 15 && minute < 30 ) {
+        return `quarter to ${timeInWords[hour + 1]}`
+    } else if ( minute > 0 && minute < 30 ) {
         return `${timeInWords[minute]} minutes past ${timeInWords[hour]}`
+    } else if ( minute > 30 && minute < 60 ) {
+        minute = 60 - minute
+        return `${timeInWords[minute]} minutes to ${timeInWords[hour + 1]}`
     }
 }
 
@@ -53,4 +55,6 @@ const covertNumberToWord = ( number ) => {
 const hour = 7
 const minute = 15
 
-console.log(timeInWords(hour, minute)) // quarter past seven
+console.log(timeInWords(hour, minute)) // quarter past seven // pass
+console.log(timeInWords(5, 47)) //thirteen minutes to six // pass
+console.log(timeInWords(3, 00)) // three o'clock // pass
