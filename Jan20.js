@@ -18,3 +18,39 @@ const x2 = 5
 const v2 = 3
 
 console.log(kangarooSong(x1, v1, x2, v2)) //no
+
+// -------------- //
+
+//Time in words
+//return the numbered time in words
+
+//given an hour and minute
+// example input 7, 15
+// output - quarter past seven
+
+const timeInWords = (hour, minute) => {
+
+    const timeInWords = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "twenty one", "twenty two", "twenty three", "twenty four", "twenty five", "twenty six", "twenty seven", "twenty eight", "twenty nine"]
+
+    if ( minute === 00 ) {
+        return `${hour} o'clock`
+    } else if ( minute === 30 ) {
+        return `half past ${timeInWords[hour]}`
+    } else if ( minute === 15 ) {
+        return `quarter past ${timeInWords[hour]}`
+    } else if ( minute === 45 ) {
+        hour = hour + 1
+        return `quarter to ${timeInWords[hour]}`
+    } else if ( minute > 0 && minute < 15 || minute > 15 && minute < 30 ) {
+        return `${timeInWords[minute]} minutes past ${timeInWords[hour]}`
+    }
+}
+
+const covertNumberToWord = ( number ) => {
+
+}
+
+const hour = 7
+const minute = 15
+
+console.log(timeInWords(hour, minute)) // quarter past seven
