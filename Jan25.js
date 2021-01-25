@@ -38,5 +38,88 @@ const arrayToHashMap = ( array ) => {
     return sockHash
 }
 
-console.log(sockMerchant(7, [1, 2, 1, 2, 1, 3, 2])) // 2
-console.log(sockMerchant(7, [1, 2, 1, 2, 1, 3, 2, 3, 2])) // 4
+// console.log(sockMerchant(7, [1, 2, 1, 2, 1, 3, 2])) // 2
+// console.log(sockMerchant(7, [1, 2, 1, 2, 1, 3, 2, 3, 2])) // 4
+
+// ------------------ //
+
+//Sherlock and anagrams
+
+// determine how many anagram pairs there are. So a substring of characters that can be rearranged to match another substring of characters
+
+//input abba
+// output 4
+// a,a . b,b. ab,ba. abb,bba
+
+//works ok in time because the limit is 100 characters, O(n2)
+
+const findAllSubstrings = ( string ) => {
+
+    let i, j, result = []
+
+    for ( i = 0; i < string.length; i++ ) {
+        for ( j = i + 1; j <= string.length; j++) {
+            result.push(string.slice(i, j))
+        }
+    }
+    return result
+}
+
+const isAnagram = ( str1, str2 ) => {
+
+    const hist = {}
+    
+    for ( let i = 0; i < str1.length; i++ ) {
+
+        const char = str1[i]
+
+        if ( hist[char] ) {
+            hist[char]++
+        } else {
+            hist[char] = 1
+        }
+    }
+   
+    for ( let j = 0; j < str2.length; j++ ) {
+        const char = str2[j]
+        
+        if ( hist[char] ) {
+            hist[char]--
+        } else {
+            return false
+        }
+    }
+    return true
+}
+
+const countAnagrams = ( currentIndex, arr ) => {
+    const currentElement = arr[currentIndex]
+    const arrRest = arr.slice(currentIndex + 1)
+    let counter = 0
+
+    for ( let i = 0; i < arrRest.length; i++ ) {
+        if ( currentElement.length === arrRest[i].length && isAnagram(currentElement, arrRest[i])) {
+            counter++
+        }
+    }
+    return counter
+}
+
+const sherlockAndAnagrams = ( string ) => {
+    const duplicatesCount = string.split('').filter( ( v, i ) => string.indexOf(v) !== i).length
+
+    if ( !duplicatesCount ) return 0
+    let anagramsCount = 0
+
+    const arr = findAllSubstrings(string)
+
+    for ( let i = 0; i < arr.length; i++ ) {
+        anagramsCount += countAnagrams(i, arr)
+    }
+
+    return anagramsCount
+}
+
+console.log(findAllSubstrings("abba")) // an array of substrings
+console.log(isAnagram("ifa", "afi")) //true
+console.log(sherlockAndAnagrams("abba")) // 4
