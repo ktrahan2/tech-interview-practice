@@ -55,6 +55,10 @@ const covertNumberToWord = ( number ) => {
 const hour = 7
 const minute = 15
 
-console.log(timeInWords(hour, minute)) // quarter past seven // pass
-console.log(timeInWords(5, 47)) //thirteen minutes to six // pass
-console.log(timeInWords(3, 00)) // three o'clock // pass
+// console.log(timeInWords(hour, minute)) // quarter past seven // pass
+// console.log(timeInWords(5, 47)) //thirteen minutes to six // pass
+// console.log(timeInWords(3, 00)) // three o'clock // pass
+
+
+
+
