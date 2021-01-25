@@ -120,6 +120,73 @@ const sherlockAndAnagrams = ( string ) => {
     return anagramsCount
 }
 
-console.log(findAllSubstrings("abba")) // an array of substrings
-console.log(isAnagram("ifa", "afi")) //true
-console.log(sherlockAndAnagrams("abba")) // 4
+// console.log(findAllSubstrings("abba")) // an array of substrings
+// console.log(isAnagram("ifa", "afi")) //true
+// console.log(sherlockAndAnagrams("abba")) // 
+
+// ---------------------- //
+
+// return the sum of an hour glass inside a matrix. 
+
+// 1 1 1 
+// 1 0 1
+// 1 1 1
+// output sum = 1+1+1+0+1+1+1 = 6
+// don't include the first and last arrays as the middle "connector" index. 
+// also skip the first and last index of an array when considering "connector point"
+// start on the 2nd array, 1st index. 
+
+const hourGlassSum = ( matrix ) => {
+
+    let highestSum = -Infinity
+    let currentArray = 1
+    let currentIndex = 1
+    
+    while ( currentArray < 5 ) {
+        
+        let connectorPointStart = matrix[currentArray][currentIndex]
+        let topSlice = matrix[currentArray - 1].slice(currentIndex - 1, currentIndex + 2)
+        let bottomSlice = matrix[currentArray + 1].slice(currentIndex - 1, currentIndex + 2)
+
+        let hourGlassTotal = sumHourGlass(connectorPointStart, topSlice, bottomSlice)
+
+        highestSum = Math.max(highestSum, hourGlassTotal)
+        
+        currentIndex++
+        
+        if ( currentIndex == 5 ) {
+            currentArray++
+            currentIndex = 1
+        }
+    }
+    return highestSum
+}
+
+const sumHourGlass = ( connectorPointStart, topSlice, bottomSlice ) => (
+    connectorPointStart + addThree(topSlice) + addThree(bottomSlice)
+)
+
+const addThree = ( array ) => array.reduce( (acc, sum) => acc += sum )
+
+const matrix = [
+    [1, 1, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0],
+    [1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0],   
+]
+
+const matrix2 = [
+    [-9, -9, -9, 1, 1, 1],
+    [0, -9, 0, 4, 3, 2,],
+    [-9, -9, -9, 1, 2, 3],
+    [0, 0, 8, 6, 6, 0],
+    [0, 0, 0, -2, 0, 0],
+    [0, 0, 1, 2, 4, 0]
+]
+
+console.log(hourGlassSum(matrix)) // 7
+console.log(hourGlassSum(matrix2)) // 28
+
+// console.log(addThree([0, 0, 0])) // 0 - pass
