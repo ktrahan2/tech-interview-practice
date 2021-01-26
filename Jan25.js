@@ -144,11 +144,11 @@ const hourGlassSum = ( matrix ) => {
     
     while ( currentArray < 5 ) {
         
-        let connectorPointStart = matrix[currentArray][currentIndex]
+        let connectorPoint = matrix[currentArray][currentIndex]
         let topSlice = matrix[currentArray - 1].slice(currentIndex - 1, currentIndex + 2)
         let bottomSlice = matrix[currentArray + 1].slice(currentIndex - 1, currentIndex + 2)
 
-        let hourGlassTotal = sumHourGlass(connectorPointStart, topSlice, bottomSlice)
+        let hourGlassTotal = sumHourGlass(connectorPoint, topSlice, bottomSlice)
 
         highestSum = Math.max(highestSum, hourGlassTotal)
         
@@ -162,8 +162,8 @@ const hourGlassSum = ( matrix ) => {
     return highestSum
 }
 
-const sumHourGlass = ( connectorPointStart, topSlice, bottomSlice ) => (
-    connectorPointStart + addThree(topSlice) + addThree(bottomSlice)
+const sumHourGlass = ( connectorPoint, topSlice, bottomSlice ) => (
+    connectorPoint + addThree(topSlice) + addThree(bottomSlice)
 )
 
 const addThree = ( array ) => array.reduce( (acc, sum) => acc += sum )
