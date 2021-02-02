@@ -15,7 +15,7 @@ function findTargetNumbers(array, target) {
 let array = [ 1, 2, 3 ]
 let target = 4
 
-let array2 = [ 7, 7, 4 ]
+let array2 = [ 7, 7, 4, 4, 7 ]
 let target2 = 14
 
 console.log(findTargetNumbers(array, target)) // (0, 2)
