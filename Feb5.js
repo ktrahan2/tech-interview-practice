@@ -1,5 +1,6 @@
 // Better.com codility test
 
+//chnaged this name to match their code answer
 const solution = ( N ) => {
 
     N = N.toString().split('')
@@ -89,7 +90,7 @@ const findLargestSubstring = ( string ) => {
     return largestCorrectSubstring > 0 ? largestCorrectSubstring : -1
 }
 
-//function to check all subsets of the string
+//function to get all subsets of the string
 const getAllSubstrings = ( string ) => {
 
     let allSubstrings = []
@@ -112,6 +113,7 @@ console.log(balancedString(string)) //failing
 console.log(balancedString(string2)) // passing
 console.log(balancedString(string3)) // passing
 console.log(balancedString(string4)) // passing
+console.log(balancedString("ABCabcbbbBabyYouAintSeenNothingyet"))
 
 // ---------------- //
 

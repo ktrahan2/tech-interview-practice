@@ -22,6 +22,10 @@ const findAllPotentialStrings = ( number, word ) => {
     let rightIndex = indexStartOfWordInNumber + word.length
     let matchingStrings = []
     let tempWord = ""
+    
+    if ( numberAsString.includes(convertWordToDigits(word)) && numberAsString.length === word.length ) {
+        return word
+    }
 
     if ( numberAsString[leftIndex] === '4' ) {
         leftIndex--
@@ -84,6 +88,7 @@ const convertWordToDigits = ( word ) => {
 }
 
 // console.log(findWordInPhoneNumber(228, "cat")) // returns 0, pass
+console.log(findAllPotentialStrings(228, 'cat'))// return cat, 
 // console.log(findAllPotentialStrings(3228, "cat")) // returns catd cate catf //pass
 // console.log(findAllPotentialStrings(34356937, "flower")) // returns d4flower, e4flower, f4flower // pass
 // console.log(findAllPotentialStrings(43569378, "flower")) // returns 4flowert, 4floweru, 4flowerv // pass
