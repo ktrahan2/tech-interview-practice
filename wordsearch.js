@@ -9,96 +9,135 @@
 
 //find a way to figure out what all the adjacent letters are to the current one.
 //see if those adjacent letters match the pattern of the current word string you are looping through, maybe use a filter
-class GraphNode {
+
+//graphing wasnt a good solution because all of the points are not unique
+//going to try kind of a map/weird tree
+class TreeNode {
     constructor(label) {
       this.label = label;
-      this.neighbors = new Set();
+      this.left = null;
+      this.right = null;
+      this.up = null;
+      this.down = null
+    }
+
+    insertLeft(value) {
+        this.left = value
+        return this.left
+    }
+
+    insertRight(value) {
+        this.right = value
+        return this.right
+    }
+
+    insertDown(value) {
+        this.down = value
+        return this.down
+    }
+
+    insertUp(value) {
+        this.up = value
+        return this.up
     }
 }
 
 const wordSearch = ( board, words ) => {
-    const letterGraph = createGraph(board)
-    const wordsFound = []
     
+    const tree = createTree(board)
+    const wordsFound = []
+   
     words.forEach(word => {
-        if ( word.length === 1 && letterGraph[word] ) {
-            wordsFound.push(word)
-        } else if ( canISpellIt( letterGraph, word)  ) {
-            wordsFound.push(word)
-        } 
+        canISpellIt(tree, word) ? wordsFound.push(word) : null
     })
-  
+
     return wordsFound
+    
 }
 
-const canISpellIt = ( graph, word ) => {
-    let i = 0
+const canISpellIt = ( tree, word ) => {
+    //need a way to not repeat nodes
+    let i = 0 
     let wordSpelled = []
-    
-    while ( i < word.length ) {
+  
+    while ( i < word.length ) { 
         let currentLetter = word[i]
+        let nextLetter = word[i+1]
         
-        if ( graph[currentLetter] && graph[currentLetter].has(word[i + 1])) {
-            wordSpelled.push(currentLetter)
+        if ( tree[currentLetter] ) {
+            
+            for ( let j = 0; j < tree[currentLetter].length; j++) {
+                let node = tree[currentLetter][j]
+                
+                if ( node.left === nextLetter || node.right === nextLetter 
+                    || node.up === nextLetter || node.down === nextLetter ) {
+                    wordSpelled.push(currentLetter)
+                    break
+                } 
+                if ( i === word.length - 1 && currentLetter === word[i] && wordSpelled.join('') !== word ) {
+                    wordSpelled.push(word[i])
+                }
+
+            }
         } else {
             break
         }
         i++
     }
-    //need a better way to add last letter if we make it to that in the while loop
-    if ( word.length > 1 ) {
-        wordSpelled.push(word[word.length - 1])    
-    }
     
-    if ( wordSpelled.join('') === word ) {
-        return true
-    } else {
-        return false
-    }
-}  
+    return wordSpelled.join('') === word ? true : false
+}
 
-//create graph of all the letters
-const createGraph = ( board ) => {
+const createTree = ( board ) => {
 
-    const graphs = {}
+    const tree = {}
+
     for ( let i = 0; i < board.length; i++ ) {
         for ( let j = 0; j < board[i].length; j++) {
             let currentChar = board[i][j]
-            //need a better way to create graphnodes with repeated letters
-            let newGraph = new GraphNode(currentChar)
+
+            let newTreeNode = new TreeNode(currentChar)
+            
             if ( j + 1 < board[i].length ) {
                 //adds right
-                newGraph.neighbors.add(board[i][j + 1])
+                newTreeNode.insertRight(board[i][j + 1])
             } 
             if ( i + 1 < board.length ) {
                 //adds down
-                newGraph.neighbors.add(board[i + 1][j])
+                newTreeNode.insertDown(board[i + 1][j])
             } 
             if ( i - 1 >= 0 ) {
                 //adds up
-                newGraph.neighbors.add(board[i - 1][j])
+                newTreeNode.insertUp(board[i - 1][j])
             } 
             if ( j - 1 >= 0 ) {
                 //adds left
-                newGraph.neighbors.add(board[i][j - 1])
+                newTreeNode.insertLeft(board[i][j - 1])
             }
-         
-            graphs[currentChar] = newGraph.neighbors
+            if ( !tree[currentChar] ) {
+                tree[currentChar] = [newTreeNode]
+            } else {
+                tree[currentChar].push(newTreeNode)
+            }
         }
     }
-    console.log(graphs)
-    return graphs
+    return tree
 }
 
-
-let board = [["a","b"],["c","d"]]
-let words = ["abcb"] 
-let words2 = ["abdc"]
+// let board = [["a","b"],["c","d"]]
+// let words = ["abcb"] 
+// let words2 = ["abdc"]
 let board2 = [["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]]
 let words3 = ["oath","pea","eat","rain"]
+let board = 
+[["o","a","b","n"],["o","t","a","e"],["a","h","k","r"],["a","f","l","v"]]
+let words = ['oa', 'oaa']
 
-// console.log(createGraph(board)) // working, creates a graph
-// console.log(wordSearch(board, words)) // []
-// console.log(wordSearch(board, words2)) // ["abdc"]
-console.log(wordSearch(board2, words3)) //passing 
-console.log(wordSearch([['a', 'b'],['a']], ['aa'])) // ['aa'], failing need a better way to create graphnodes
+// console.log(createTree(board)) // working
+// console.log(createTree([['a', 'a']])) // working
+// console.log(wordSearch(board, words2)) // [abcd], passing
+console.log(wordSearch(board2, words3)) // [oath, eat] // passing
+console.log(wordSearch([['a','a']], ['aaa'])) // [] //  not passing
+console.log(wordSearch([['a','a']], ['aa'])) // ['aa'] // passing
+console.log(wordSearch(board, words)) // ['oa', 'oaa'] // passing
+// console.log(wordSearch([['a', 'b'],['a', 'b']], ['aa'])) // ['aa'], failing need a better way to create graphnodes
