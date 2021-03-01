@@ -18,7 +18,8 @@ class TreeNode {
       this.left = null;
       this.right = null;
       this.up = null;
-      this.down = null
+      this.down = null;
+      this.visited = false;
     }
 
     insertLeft(value) {
@@ -40,6 +41,11 @@ class TreeNode {
         this.up = value
         return this.up
     }
+    //maybe can fix the issue with marking if they have been visited or not and not using it if its been visited
+    setvisited(value) {
+        this.visited = value
+        return this.visited
+    }
 }
 
 const wordSearch = ( board, words ) => {
@@ -59,32 +65,42 @@ const canISpellIt = ( tree, word ) => {
     //need a way to not repeat nodes
     let i = 0 
     let wordSpelled = []
-  
+    //this loops through each letter in my current word
     while ( i < word.length ) { 
         let currentLetter = word[i]
+        let previousLetter = word[i - 1]
         let nextLetter = word[i+1]
         
-        if ( tree[currentLetter] ) {
-            
+        if ( tree[currentLetter] && i === 0 ) {
+            //this loops through if there are multiple of the same letter
             for ( let j = 0; j < tree[currentLetter].length; j++) {
-                let node = tree[currentLetter][j]
                 
-                if ( node.left === nextLetter || node.right === nextLetter 
-                    || node.up === nextLetter || node.down === nextLetter ) {
-                    wordSpelled.push(currentLetter)
-                    break
-                } 
-                if ( i === word.length - 1 && currentLetter === word[i] && wordSpelled.join('') !== word ) {
-                    wordSpelled.push(word[i])
+                let currentNode = tree[currentLetter][j]
+                
+                if ( currentNode.left === nextLetter || currentNode.right === nextLetter 
+                    || currentNode.up === nextLetter || currentNode.down === nextLetter ) {
+                        wordSpelled.push(currentLetter)
+                        currentNode.visited = false
                 }
-
             }
+        } else if ( tree[currentLetter] && i > 0 ) {
+            for ( let j = 0; j < tree[currentLetter].length; j++) {
+                let currentNode = tree[currentLetter][j]
+                
+                if ( currentNode.left === nextLetter || currentNode.right === nextLetter 
+                    || currentNode.up === nextLetter || currentNode.down === nextLetter 
+                    && currentNode.left === previousLetter || currentNode.right === previousLetter 
+                    || currentNode.up === previousLetter || currentNode.down === previousLetter && currentNode.visited === false ) {
+                        wordSpelled.push(currentLetter)
+                        currentNode.visited = false
+                }
+            } 
         } else {
             break
         }
         i++
     }
-    
+    console.log(wordSpelled)
     return wordSpelled.join('') === word ? true : false
 }
 
@@ -139,5 +155,5 @@ let words = ['oa', 'oaa']
 console.log(wordSearch(board2, words3)) // [oath, eat] // passing
 console.log(wordSearch([['a','a']], ['aaa'])) // [] //  not passing
 console.log(wordSearch([['a','a']], ['aa'])) // ['aa'] // passing
-console.log(wordSearch(board, words)) // ['oa', 'oaa'] // passing
+// console.log(wordSearch(board, words)) // ['oa', 'oaa'] // passing
 // console.log(wordSearch([['a', 'b'],['a', 'b']], ['aa'])) // ['aa'], failing need a better way to create graphnodes

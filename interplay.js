@@ -1,22 +1,22 @@
 //Given a non-negative integer, write a function to return the minimum number of steps to 
 //reduce it to zero if you can only divide by 2 or subtract by 1.
 
-const reduceToZero = ( number ) => {
+const reduceToZero = ( number, count ) => {
     
-    let count = 0
-    
-    while ( number != 0 ) {
-        if ( number % 2 === 0 ) {
-            number = number / 2
-            count++
-        } else {
-            number = number - 1
-            count++
-        }
+    if ( number % 2 === 0 ) {
+        number /= 2
+        count++
+    } else {
+        number -= 1
+        count++
+    }
+
+    if ( number !== 0 ) {
+        return reduceToZero(number, count)
     }
     return count
 }
 
 let number = 14 
 
-console.log(reduceToZero(number))
+console.log(reduceToZero(number, 0))
