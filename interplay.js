@@ -19,4 +19,4 @@ const reduceToZero = ( number, count ) => {
 
 let number = 14 
 
-console.log(reduceToZero(number, 0))
+console.log(reduceToZero(number, 0)) // return 6
