@@ -32,9 +32,14 @@ const sortByDifficulty = (courses) => {
     const coursesObject = {};
 
     courses.forEach(course => {
-        if (coursesObject[course.difficulty_level]) {
+        if (coursesObject[course.difficulty_level] && course.difficulty_level) {
             coursesObject[course.difficulty_level] = insertCourseByNameAlphabetically(course, coursesObject[course.difficulty_level])
-        } else {
+        } else if (!course.difficulty_level && courses["randoms"]) {
+            coursesObject["randoms"] = insertCourseByNameAlphabetically(course, coursesObject["randoms"])
+        } else if ( !course.difficulty_level) {
+            coursesObject["randoms"] = [course]
+        }
+         else {
             coursesObject[course.difficulty_level] = [course]
         }
     });
